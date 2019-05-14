@@ -13,7 +13,7 @@ class Line extends Component {
 
   // 订阅类属性类型,检查属性类型
   static propTypes = {
-    lineDirection: PropTypes.string,
+    lineDirection: PropTypes.oneOf(['row', 'column']),
     length: PropTypes.number,
     paddingStart: PropTypes.number,
     paddingEnd: PropTypes.number,
@@ -32,8 +32,7 @@ class Line extends Component {
   }
 
   render() {
-    // 打印出来, xmg
-    console.log(this.props.name, 11111)
+
     if(this.props.lineDirection === 'row') {
       return (
         <View style={{ width: 0.5, height: this.props.length, backgroundColor: this.props.backgroundColor, paddingTop: this.props.paddingStart, paddingBottom: this.props.paddingEnd }} >
