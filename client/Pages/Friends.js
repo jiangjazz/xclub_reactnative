@@ -5,6 +5,12 @@ import { bindActionCreators } from 'redux';
 import { addFriend } from '../Actions/FriendActions';
 
 class Friends extends React.Component {
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: navigation.getParam('otherParam', 'Friends')
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
