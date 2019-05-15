@@ -1,10 +1,12 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import Home from './Pages/Home';
+import Ucenter from './Pages/Ucenter';
 import Friends from './Pages/Friends';
 
 const AppNavigator = createStackNavigator({
-  Home: { screen: Home },
+  Ucenter: { screen: Ucenter },
   Friends: { screen: Friends },
+}, {
+  initialRouteName:  'Ucenter'
 });
 
 export default createAppContainer(AppNavigator);

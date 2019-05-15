@@ -5,7 +5,7 @@ import { StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({
   block: {
     marginHorizontal: 10,
-    marginVertical: 10,
+    marginVertical: 4,
     padding: 16,
     backgroundColor: 'white',
     borderRadius: 10

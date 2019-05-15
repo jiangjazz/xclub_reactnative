@@ -12,15 +12,13 @@ const IconSet = createIconSet(glyphMap, 'Iconfont', 'Iconfont.ttf');
 const styles = StyleSheet.create({
   iconView: {
     backgroundColor: '#999999',
-    borderRadius: 25, 
     overflow: 'hidden'
   },
   icon: {
     backgroundColor: 'transparent',
-    color: 'white',
-    padding: 10,
-    // fontSize: 30,
-    borderRadius: 10
+    borderRadius: 10,
+    alignItems: 'center',
+    textAlign: 'center'
   }
 });
 
@@ -36,7 +34,9 @@ class Iconfont extends Component {
     backgroundColor: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string)
-    ])
+    ]),
+    size: PropTypes.number,
+    padding: PropTypes.number,
   }
 
   //  自定义属性，设置初始值
@@ -44,28 +44,33 @@ class Iconfont extends Component {
     backgroundColor: '#999999',
     color: 'white',
     size: 30,
-    style: {}
+    style: {},
+    padding: 10
+  }
+
+  get borderRadius() {
+    return this.props.size / 2 + this.props.padding
   }
 
   render() {
-    let { style, name, size, color, backgroundColor } = this.props
-    
+    let { style, name, size, color, backgroundColor, padding } = this.props
+
     if (typeof backgroundColor === 'string') {
-      
+
       return (
-        <View style={{...styles.iconView, backgroundColor}}>
-          <IconSet style={{ ...styles.icon, ...style }} name={name} size={size} color={color} />
+        <View style={{ ...styles.iconView, borderRadius: this.borderRadius, backgroundColor }}>
+          <IconSet style={{ ...styles.icon, padding, width: (size + padding*2), ...style }} name={name} size={size} color={color} />
         </View>
       )
     } else {
 
       return (
-        <LinearGradient style={styles.iconView} colors={backgroundColor}>
-          <IconSet style={{ ...styles.icon, ...style }} name={name} size={size} color={color} />
+        <LinearGradient style={{ ...styles.iconView, borderRadius: this.borderRadius }} colors={backgroundColor}>
+          <IconSet style={{ ...styles.icon, padding, width: (size + padding*2), ...style }} name={name} size={size} color={color} />
         </LinearGradient>
       )
     }
-    
+
   }
 }
 
