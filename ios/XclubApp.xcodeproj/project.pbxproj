@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -47,6 +46,8 @@
 		E18DD50C228A9B1700EFB1B5 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E18DD508228A9B1700EFB1B5 /* iconfont.ttf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
+		4FAC63E20BDB4232BD050671 /* antfill.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23DAA521A1D4F699DFCFDE7 /* antfill.ttf */; };
+		FBF6972A9F384DD7A79F8AEA /* antoutline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB960A3926FD46AF80CB755A /* antoutline.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -388,6 +389,8 @@
 		E18DD508228A9B1700EFB1B5 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../../assets/font/iconfont.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		A23DAA521A1D4F699DFCFDE7 /* antfill.ttf */ = {isa = PBXFileReference; name = "antfill.ttf"; path = "../node_modules/@ant-design/icons-react-native/fonts/antfill.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CB960A3926FD46AF80CB755A /* antoutline.ttf */ = {isa = PBXFileReference; name = "antoutline.ttf"; path = "../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -633,6 +636,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E18DD4D0228A976900EFB1B5 /* Recovered References */,
+				6C994CFA7CAC4EEE9CD8F378 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -694,6 +698,16 @@
 			);
 			path = Fonts;
 			sourceTree = "<group>";
+		};
+		6C994CFA7CAC4EEE9CD8F378 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				A23DAA521A1D4F699DFCFDE7 /* antfill.ttf */,
+				CB960A3926FD46AF80CB755A /* antoutline.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1183,6 +1197,8 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				E18DD509228A9B1700EFB1B5 /* iconfont.ttf in Resources */,
+				4FAC63E20BDB4232BD050671 /* antfill.ttf in Resources */,
+				FBF6972A9F384DD7A79F8AEA /* antoutline.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

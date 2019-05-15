@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, StatusBar, Image, TouchableOpacity, FlatList, TouchableHighlight } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { StyleSheet, Text, View, Button, StatusBar, Image, TouchableOpacity, FlatList, TouchableHighlight, Modal, SafeAreaView } from 'react-native';
+import { Icon } from '@ant-design/react-native';
 import { connect } from 'react-redux';
-
 import { Block, Line, Iconfont } from '../Components/index'
+
+
+import { LoginFetch } from '../Actions/APIS';
+
 
 const DETAIL = {
   url: 'https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=1805729765,2539360167&fm=173&app=25&f=JPEG?w=218&h=146&s=3B927CCD0EEBD95D5E2074390300D012',
@@ -10,7 +15,11 @@ const DETAIL = {
   desc: 'It S Hurricane Season But We Are now at china, hahahha'
 }
 
-class Home extends Component {
+class Ucenter extends Component {
+  state = {
+    modalVisible: false
+  };
+
   static navigationOptions = {
     title: 'Ucenter',
     headerStyle: {
@@ -20,6 +29,14 @@ class Home extends Component {
     headerTitleStyle: {
       fontWeight: 'bold',
     }
+  }
+
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+
+  componentDidMount() {
+    this.props.dispatch(LoginFetch({username: 'jiangjazz', password: '123123'}))
   }
 
   render() {
@@ -48,6 +65,30 @@ class Home extends Component {
         }
         {/* actionList end*/}
 
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            alert("Modal has been closed.");
+          }}
+        >
+          <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            {/* close */}
+            <TouchableHighlight
+              style={{ position: 'absolute', top: 32, left: 10, zIndex: 2 }}
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible);
+              }}
+            >
+              <Iconfont backgroundColor="white" color="#888" name="close" />
+            </TouchableHighlight>
+            {/* close end*/}
+
+            <Icon name="account-book" size="md" color="red" />
+
+          </SafeAreaView>
+        </Modal>
 
       </View>
     );
@@ -66,7 +107,7 @@ class Home extends Component {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {
             let borderBottomColor = (index === 3 ? '#ffffff' : '#cccccc');
-            
+
             return (
               <TouchableHighlight
                 underlayColor="white">
@@ -86,12 +127,15 @@ class Home extends Component {
   }
 
   renderTopCard() {
+    const { ucenter: { usermsg, uid }, base: { baseUrl } } = this.props
+    console.log(this.props.ucenter)
+    
     return (
       <Block style={styles.topCard}>
         <View style={{ flexDirection: 'row', }}>
-          <Image style={styles.headImage} source={{ url: DETAIL.url }} />
+          <Image style={styles.headImage} source={{ url: `${baseUrl}/uc_server/avatar.php?uid=${uid}&size=big` }} />
           <View style={styles.headDesc}>
-            <Text style={{ marginTop: 4, fontSize: 16, fontWeight: 'bold', color: '#333333' }}>{DETAIL.name}</Text>
+            <Text style={{ marginTop: 4, fontSize: 16, fontWeight: 'bold', color: '#333333' }}>{usermsg.member_username}</Text>
             <Text numberOfLines={1} ellipsizeMode="tail" style={{ marginTop: 8, fontSize: 12, color: '#aaaaaa' }}>{DETAIL.desc}</Text>
           </View>
           <TouchableOpacity underlayColor="white">
@@ -208,9 +252,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => {
-  const { friends } = state
-  return { friends }
-};
+const mapStateToProps = (state) => ({
+  base: state.base,
+  ucenter: state.ucenter
+});
 
-export default connect(mapStateToProps)(Home);
+export default connect(
+  mapStateToProps
+)(Ucenter);
