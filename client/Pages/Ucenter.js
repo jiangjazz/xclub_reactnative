@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { StyleSheet, Text, View, Button, StatusBar, Image, TouchableOpacity, FlatList, TouchableHighlight, Modal, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, StatusBar, Image, TouchableOpacity, FlatList, TouchableHighlight, Modal, SafeAreaView, Dimensions } from 'react-native';
+import HTML from 'react-native-render-html';
+import HTMLView from 'react-native-htmlview';
+
 import { Icon } from '@ant-design/react-native';
 import { connect } from 'react-redux';
 import { Block, Line, Iconfont } from '../Components/index'
 
 
-import { LoginFetch } from '../Actions/APIS';
+import { LogoutFetch, LoginFetch } from '../Actions/APIS';
+
+import { formatEmoji } from '../common/method'
 
 
 const DETAIL = {
@@ -36,7 +41,8 @@ class Ucenter extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(LoginFetch({username: 'jiangjazz', password: '123123'}))
+    this.props.dispatch(LogoutFetch())
+    this.props.dispatch(LoginFetch({ username: '111111', password: '111111' }))
   }
 
   render() {
@@ -47,6 +53,7 @@ class Ucenter extends Component {
       <View style={styles.container}>
 
         <View style={{ height: 50, backgroundColor: '#00ADEF' }} />
+
         {/* 头部card */}
         {
           this.renderTopCard()
@@ -64,6 +71,7 @@ class Ucenter extends Component {
           this.renderActionList()
         }
         {/* actionList end*/}
+
 
         <Modal
           animationType="slide"
@@ -127,16 +135,26 @@ class Ucenter extends Component {
   }
 
   renderTopCard() {
-    const { ucenter: { usermsg, uid }, base: { baseUrl } } = this.props
+    const { ucenter: { usermsg, userDetail, uid }, base: { baseUrl } } = this.props
     console.log(this.props.ucenter)
-    
+
     return (
       <Block style={styles.topCard}>
         <View style={{ flexDirection: 'row', }}>
           <Image style={styles.headImage} source={{ url: `${baseUrl}/uc_server/avatar.php?uid=${uid}&size=big` }} />
           <View style={styles.headDesc}>
             <Text style={{ marginTop: 4, fontSize: 16, fontWeight: 'bold', color: '#333333' }}>{usermsg.member_username}</Text>
-            <Text numberOfLines={1} ellipsizeMode="tail" style={{ marginTop: 8, fontSize: 12, color: '#aaaaaa' }}>{DETAIL.desc}</Text>
+            {
+              !!userDetail.sightml ?
+                (
+                  <HTMLView style={{height: 16, overflow: 'hidden'}} value={`${formatEmoji(userDetail.sightml)}`} />
+                )
+                : (
+                  <Text numberOfLines={1} ellipsizeMode="tail" style={{ marginTop: 8, fontSize: 12, color: '#aaaaaa' }}>
+                    'No relevant content'
+                  </Text>
+                )
+            }
           </View>
           <TouchableOpacity underlayColor="white">
             <View style={styles.headIcon}>

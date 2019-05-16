@@ -1,6 +1,20 @@
-import { Login, GetProfile } from '../config/apis'
+import { Login, GetProfile, Logout } from '../config/apis'
 import FetchData from '../Components/FetchData'
 import * as UcenterAction from './UcenterActions'
+
+/**
+ * 退出登陆
+ */
+export const LogoutFetch = () => {
+
+  return (dispatch, getState) => {
+
+    FetchData(Logout, {})
+      .then(res => {
+        console.log('触发了退出登陆', res)
+      })
+  }
+}
 
 /**
  * 登陆

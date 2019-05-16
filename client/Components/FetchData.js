@@ -1,4 +1,7 @@
 
+// cookie
+let xclubcookie = ''
+
 export default function FetchData(url, config = {}) {
   console.log(url, 999999)
   let {params = {}, body = {}, method = 'get', ...other } = config
@@ -35,11 +38,12 @@ export default function FetchData(url, config = {}) {
       'Accept': 'application/json, text/plain, */*',
       'Content-Type': 'application/json'
     },
+    credentials: true,
     body: formData,
     ...other
   })
     .then((response) => {
-      // console.warn(response, 99999)
+      console.warn(response, 99999)
       return response.json()
     })
     .catch(err => {
